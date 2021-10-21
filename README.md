@@ -48,12 +48,12 @@
 
 ## 技术介绍
 
-- **前端：**Vue + vue-router + vuex + axios + vuetify + element + echarts
+- **前端： ** Vue + vue-router + vuex + axios + vuetify + element + echarts
   - 前台框架：vuetify
   - 后台框架：element
 
-- **后端：**SpringBoot + SpringSecurity + MySQL + MybatisPlus + Redis + RabbitMQ + Elasticsearch + MaxWell + Swagger2 + Docker + Nginx
-- **其他：**七牛云OSS对象存储 
+- **后端：** SpringBoot + SpringSecurity + MySQL + MybatisPlus + Redis + RabbitMQ + Elasticsearch + MaxWell + Swagger2 + Docker + Nginx
+- **其他：** 七牛云OSS对象存储 
 
 ## 开发环境
 
