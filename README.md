@@ -9,54 +9,34 @@
          <img src="https://img.shields.io/badge/license-Apache--2.0-informational" alt="license" />
     </a>
 </div>
-
 <div align="center" >
-	<a href="https://gitee.com/lhMorri/personal-blog"> 
+	<a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;"> 
          <img src="https://img.shields.io/badge/JDK-1.8%2B-brightgreen" alt="JDK" />
     </a>
-    <a href="https://gitee.com/lhMorri/personal-blog"> 
+    <a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;"> 
          <img src="https://img.shields.io/badge/SpringBoot-2.5.5-brightgreen" alt="SpringBoot" />
     </a>
-    <a href="https://gitee.com/lhMorri/personal-blog"> 
+    <a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;"> 
          <img src="https://img.shields.io/badge/Vue-2.6.11-brightgreen" alt="Vue" />
     </a>
-    <a href="https://gitee.com/lhMorri/personal-blog"> 
+    <a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;"> 
          <img src="https://img.shields.io/badge/MySQL-8.0.26-brightgreen" alt="MySQL" />
     </a>
-    <a href="https://gitee.com/lhMorri/personal-blog"> 
+    <a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;"> 
          <img src="https://img.shields.io/badge/Mybatis--Plus-3.4.1-brightgreen" alt="Mybatis-Plus" />
     </a>
-    <a href="https://gitee.com/lhMorri/personal-blog"> 
+    <a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;"> 
          <img src="https://img.shields.io/badge/Redis-6.0.16-brightgreen" alt="Redis" />
     </a>
-    <a href="https://gitee.com/lhMorri/personal-blog"> 
+    <a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;"> 
          <img src="https://img.shields.io/badge/RabbitMQ-3.8.23-brightgreen" alt="RabbitMQ" />
     </a>
-    <a href="https://gitee.com/lhMorri/personal-blog"> 
+    <a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;"> 
          <img src="https://img.shields.io/badge/Elasticsearch-7.6.2-brightgreen" alt="Elasticsearch" />
     </a>
 </div>
-<style type="text/css">
-    a {
-         text-decoration: none;
-    }
-    /*正常的未被访问过的链接*/
-	a:link {
-    	text-decoration: none;
-	}
-	/*已经访问过的链接*/
-	a:visited {
-    	text-decoration: none;
-	}
-	/*鼠标划过(停留)的链接*/
-	a:hover {
-    	text-decoration: none;
-	}
-	/* 正在点击的链接*/
-	a:active {
-    	text-decoration: none;
-	}
-</style>
+<div></div>
+
 <div align="center">
     <a href="#在线地址">在线地址</a>|
     <a href="#技术介绍">技术介绍</a>|
@@ -69,6 +49,7 @@
     <a href="#项目总结">项目总结</a>|
     <a href="#项目截图">项目截图</a>
 </div>
+
 
 ## 在线地址
 
