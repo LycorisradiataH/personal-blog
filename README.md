@@ -17,8 +17,6 @@
          <img src="https://img.shields.io/badge/Elasticsearch-7.6.2-brightgreen" alt="Elasticsearch" />
     </a>
 </div>
-
-
 <div align="center">
     <a href="#在线地址">在线地址</a>|
     <a href="#技术介绍">技术介绍</a>|
@@ -31,6 +29,7 @@
     <a href="#项目总结">项目总结</a>|
     <a href="#项目截图">项目截图</a>
 </div>
+
 
 ## 在线地址
 
@@ -83,7 +82,7 @@
     - blog-admin为后台项目
 2.  后端项目位于blog-springboot目录下
 3.  SQL文件位于根目录下
-    - <font color='red'>注</font>：MySQL版本需要 <font color='red'>8.0</font> 以上
+    - <span style='color: red'>注</span>：MySQL版本需要 <span style='color: red'>8.0</span> 以上
 4.  接口文档地址：
     - 启动后端项目访问：[http://127.0.0.1:8080/swagger-ui.html](http://127.0.0.1:8080/swagger-ui.html)
 5.  拉取项目的注意事项：
@@ -162,15 +161,15 @@ blog
 
 ## 运行环境
 
-- **服务器：** 腾讯云2核4G CentOS7.2
+- **推荐配置：**
+  - **服务器：** 腾讯云2核4G 带宽8M CentOS7.6
 
-- **CDN：** 阿里云全站加速
+  - **CDN：** 腾讯云全站加速
 
-- **对象存储：** 七牛云OSS
+  - **对象存储：** 七牛云OSS
 
-这套搭配响应速度非常快，可以做到响应100ms以下。
-
-- **最低配置：** 1核2G服务器（关闭ElasticSearch）
+- **最低配置：** 
+  - **服务器：** 1核2G服务器（关闭 Elasticsearch）
 
 ## 快速开始
 
