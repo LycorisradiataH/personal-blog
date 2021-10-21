@@ -2,40 +2,37 @@
 
 ## 介绍
 
-<div style="text-align: center">基于SpringBoot + Vue开发的个人博客。</div>
+<div align="center">基于SpringBoot + Vue开发的个人博客。</div>
 
 <div align="center">
-    <a href="https://gitee.com/lhMorri/personal-blog"> 
+    <a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;" onMouseOver="text-decoration: none;"> 
          <img src="https://img.shields.io/badge/license-Apache--2.0-informational" alt="license" />
     </a>
-</div>
-<div align="center" >
-	<a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;"> 
+	<a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;" onMouseOver="text-decoration: none;"> 
          <img src="https://img.shields.io/badge/JDK-1.8%2B-brightgreen" alt="JDK" />
     </a>
-    <a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;"> 
+    <a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;" onMouseOver="text-decoration: none;"> 
          <img src="https://img.shields.io/badge/SpringBoot-2.5.5-brightgreen" alt="SpringBoot" />
     </a>
-    <a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;"> 
+    <a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;" onMouseOver="text-decoration: none;"> 
          <img src="https://img.shields.io/badge/Vue-2.6.11-brightgreen" alt="Vue" />
     </a>
-    <a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;"> 
+    <a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;" onMouseOver="text-decoration: none;"> 
          <img src="https://img.shields.io/badge/MySQL-8.0.26-brightgreen" alt="MySQL" />
     </a>
-    <a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;"> 
+    <a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;" onMouseOver="text-decoration: none;"> 
          <img src="https://img.shields.io/badge/Mybatis--Plus-3.4.1-brightgreen" alt="Mybatis-Plus" />
     </a>
-    <a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;"> 
+    <a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;" onMouseOver="text-decoration: none;"> 
          <img src="https://img.shields.io/badge/Redis-6.0.16-brightgreen" alt="Redis" />
     </a>
-    <a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;"> 
+    <a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;" onMouseOver="text-decoration: none;"> 
          <img src="https://img.shields.io/badge/RabbitMQ-3.8.23-brightgreen" alt="RabbitMQ" />
     </a>
-    <a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;"> 
+    <a href="https://gitee.com/lhMorri/personal-blog" style="text-decoration: none;" onMouseOver="text-decoration: none;"> 
          <img src="https://img.shields.io/badge/Elasticsearch-7.6.2-brightgreen" alt="Elasticsearch" />
     </a>
 </div>
-<div></div>
 
 <div align="center">
     <a href="#在线地址">在线地址</a>|
@@ -50,7 +47,6 @@
     <a href="#项目截图">项目截图</a>
 </div>
 
-
 ## 在线地址
 
 **项目链接：**
@@ -61,7 +57,7 @@
 - 密码：123456
 - 此账号仅用于查看后台
 
-**GitHub地址：**
+**GitHub地址：**[https://github.com/LycorisradiataH/personal-blog](https://github.com/LycorisradiataH/personal-blog)
 
 **Gitee地址：**[https://gitee.com/lhMorri/personal-blog](https://gitee.com/lhMorri/personal-blog)
 
