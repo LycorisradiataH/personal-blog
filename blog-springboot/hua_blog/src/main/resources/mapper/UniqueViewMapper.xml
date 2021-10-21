@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybaits.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hua.mapper.UniqueViewMapper">
+
+    <select id="listUniqueView" resultType="com.hua.pojo.vo.UniqueViewVO">
+        SELECT
+            date_format( gmt_create, '%Y-%m-%d' ) DAY,
+            view_count
+        FROM
+            hua_unique_view
+        WHERE
+            gmt_create &gt;= #{startTime}
+            AND gmt_create &lt;= #{endTime}
+        ORDER BY
+        gmt_create
+    </select>
+
+</mapper>

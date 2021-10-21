@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybaits.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hua.mapper.ArticleMapper">
+
+    <select id="listArticle" resultMap="articleHomeVOMap">
+        SELECT
+            a.id,
+            article_cover,
+            article_title,
+            substr( article_content, 1, 500 ) article_content,
+            a.gmt_create,
+            a.is_top,
+            a.type,
+            category_id,
+            category_name,
+            t.id tag_id,
+            t.tag_name
+        FROM
+            (
+                SELECT
+                    id,
+                    article_cover,
+                    article_title,
+                    article_content,
+                    is_top,
+                    type,
+                    gmt_create,
+                    category_id
+                FROM
+                    hua_article
+                WHERE
+                    is_delete = 0
+                  AND STATUS = 1
+                ORDER BY
+                    is_top DESC,
+                    id DESC
+                LIMIT #{current}, #{size}
+
+            ) a
+                JOIN hua_category c ON a.category_id = c.id
+                JOIN hua_article_tag atg ON a.id = atg.article_id
+                JOIN hua_tag t ON t.id = atg.tag_id
+        ORDER BY
+            a.is_top DESC,
+            a.id DESC
+    </select>
+
+    <select id="listRecommendArticle" resultType="com.hua.pojo.vo.ArticleRecommendVO">
+        SELECT
+            id,
+            article_title,
+            article_cover,
+            gmt_create
+        FROM
+            (
+            SELECT DISTINCT
+                article_id
+            FROM
+                ( SELECT tag_id FROM hua_article_tag WHERE article_id = #{articleId} ) t
+                  JOIN hua_article_tag t1 ON t.tag_id = t1.tag_id WHERE article_id != #{articleId}
+            ) t2
+            JOIN hua_article a ON t2.article_id = a.id
+        WHERE
+            a.is_delete = 0
+        ORDER BY
+            is_top DESC,
+            id DESC
+        LIMIT 6
+    </select>
+
+    <select id="getArticleById" resultMap="articleVOMap">
+        SELECT
+            a.id,
+            article_cover,
+            article_title,
+            article_content,
+            a.type,
+            a.original_url,
+            a.gmt_create,
+            a.gmt_modified,
+            a.category_id,
+            category_name,
+            t.id tag_id,
+            tag_name
+        FROM
+            hua_article a
+            JOIN hua_category c ON c.id = a.category_id
+            JOIN hua_article_tag atg ON atg.article_id = a.id
+            JOIN hua_tag t ON atg.tag_id = t.id
+        WHERE
+            a.id = #{articleId}
+            AND a.is_delete = 0
+            AND a.status = 1
+    </select>
+
+    <select id="listArticleByQueryParam" resultMap="articlePreviewMap">
+        SELECT
+        a.id,
+        article_cover,
+        article_title,
+        a.gmt_create,
+        a.category_id,
+        category_name,
+        t.id tag_id,
+        tag_name
+        FROM
+        (
+        SELECT
+        id,
+        article_cover,
+        article_title,
+        article_content,
+        gmt_create,
+        category_id
+        FROM
+        hua_article
+        <where>
+            <if test="queryParam.categoryId != null">
+                category_id = #{queryParam.categoryId}
+            </if>
+            <if test = "queryParam.tagId != null">
+                id IN (
+                    SELECT
+                    article_id
+                    FROM
+                    hua_article_tag
+                    WHERE
+                    tag_id = #{queryParam.tagId})
+            </if>
+        </where>
+        AND is_delete = 0
+        AND `status` = 1
+        ORDER BY
+        id DESC
+        LIMIT #{current}, #{size}
+        ) a
+        JOIN hua_category c ON a.category_id = c.id
+        JOIN hua_article_tag atg ON a.id = atg.article_id
+        JOIN hua_tag t ON t.id = atg.tag_id
+    </select>
+
+    <select id="listBackArticle" resultMap="articleBackVOMap">
+        SELECT
+        a.id,
+        article_cover,
+        article_title,
+        type,
+        is_top,
+        is_delete,
+        a.STATUS,
+        a.gmt_create,
+        category_name,
+        t.id tag_id,
+        t.tag_name
+        FROM
+        (
+        SELECT
+        id,
+        article_cover,
+        article_title,
+        type,
+        is_top,
+        is_delete,
+        STATUS,
+        gmt_create,
+        category_id
+        FROM
+        hua_article
+        <where>
+            is_delete = #{queryParam.isDelete}
+            <if test="queryParam.status != null">
+                and `status` = #{queryParam.status}
+            </if>
+            <if test="queryParam.keywords != null">
+                and article_title like concat ('%', #{queryParam.keywords}, '%')
+            </if>
+            <if test="queryParam.categoryId != null">
+                and category_id = #{queryParam.categoryId}
+            </if>
+            <if test="queryParam.type != null">
+                and type = #{queryParam.type}
+            </if>
+            <if test="queryParam.tagId != null">
+                and id in
+                (
+                SELECT
+                article_id
+                FROM
+                hua_article_tag
+                WHERE
+                tag_id = #{queryParam.tagId}
+                )
+            </if>
+        </where>
+        ORDER BY
+        is_top DESC,
+        id DESC
+        LIMIT #{current}, #{size}
+        ) a
+        LEFT JOIN hua_category c ON c.id = a.category_id
+        LEFT JOIN hua_article_tag atg ON atg.article_id = a.id
+        LEFT JOIN hua_tag t ON t.id = atg.tag_id
+        ORDER BY
+        is_top DESC,
+        a.id DESC
+    </select>
+
+    <select id="listArticleStatistics" resultType="com.hua.pojo.vo.ArticleStatisticsVO">
+        SELECT
+        DATE_FORMAT( gmt_create, "%Y-%m-%d" ) AS date,
+        COUNT( 1 ) AS count
+        FROM
+        hua_article
+        GROUP BY date
+        ORDER BY date DESC
+    </select>
+
+    <select id="queryCount" resultType="java.lang.Integer">
+        SELECT
+        count( DISTINCT a.id )
+        FROM
+        hua_article a
+        LEFT JOIN hua_article_tag atg ON a.id = atg.article_id
+        <where>
+            is_delete = #{queryParam.isDelete}
+            <if test="queryParam.keywords != null">
+                AND title like concat('%', #{queryParam.keywords}, '%')
+            </if>
+            <if test="queryParam.status != null">
+                AND `status` = #{queryParam.status}
+            </if>
+            <if test="queryParam.categoryId != null">
+                AND category_id = #{queryParam.categoryId}
+            </if>
+            <if test="queryParam.type != null">
+                AND type = #{queryParam.type}
+            </if>
+            <if test="queryParam.tagId != null">
+                AND at.tag_id = #{queryParam.tagId}
+            </if>
+        </where>
+    </select>
+
+    <resultMap id="articleBackVOMap" type="com.hua.pojo.vo.ArticleBackVO">
+        <id column="id" property="id"/>
+        <result column="article_cover" property="articleCover"/>
+        <result column="article_title" property="articleTitle"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="type" property="type"/>
+        <result column="is_top" property="isTop"/>
+        <result column="is_delete" property="isDelete"/>
+        <result column="status" property="status"/>
+        <result column="category_name" property="categoryName"/>
+        <collection property="tagVOList" ofType="com.hua.pojo.vo.TagVO">
+            <id column="tag_id" property="id"/>
+            <result column="tag_name" property="tagName"/>
+        </collection>
+    </resultMap>
+    
+    <resultMap id="articlePreviewMap" type="com.hua.pojo.vo.ArticlePreviewVO">
+        <id column="id" property="id"/>
+        <result column="article_cover" property="articleCover"/>
+        <result column="article_title" property="articleTitle"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="category_name" property="categoryName"/>
+        <collection property="tagVOList" ofType="com.hua.pojo.vo.TagVO">
+            <id column="tag_id" property="id"/>
+            <result column="tag_name" property="tagName"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="articleVOMap" type="com.hua.pojo.vo.ArticleVO">
+        <id column="id" property="id"/>
+        <result column="article_cover" property="articleCover"/>
+        <result column="article_title" property="articleTitle"/>
+        <result column="article_content" property="articleContent"/>
+        <result column="type" property="type"/>
+        <result column="original_url" property="originalUrl"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="category_name" property="categoryName"/>
+        <collection property="tagVOList" ofType="com.hua.pojo.vo.TagVO">
+            <id column="tag_id" property="id"/>
+            <result column="tag_name" property="tagName"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="articleHomeVOMap" type="com.hua.pojo.vo.ArticleHomeVO">
+        <id column="id" property="id" />
+        <result column="article_cover" property="articleCover"/>
+        <result column="article_title" property="articleTitle"/>
+        <result column="article_content" property="articleContent"/>
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="is_top" property="isTop" />
+        <result column="type" property="type"/>
+        <result column="category_id" property="categoryId" />
+        <result column="category_name" property="categoryName" />
+        <collection property="tagVOList" ofType="com.hua.pojo.vo.TagVO">
+            <id column="tag_id" property="id" />
+            <result column="tag_name" property="tagName" />
+        </collection>
+    </resultMap>
+
+</mapper>

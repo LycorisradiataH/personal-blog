@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybaits.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hua.mapper.MenuMapper">
+
+    <select id="listMenusByUserId" resultType="com.hua.pojo.entity.Menu">
+        SELECT DISTINCT
+            m.id,
+            `name`,
+            `path`,
+            component,
+            icon,
+            is_hidden,
+            parent_id,
+            order_num
+        FROM
+            hua_user_role ur
+            JOIN hua_role_menu rm ON ur.role_id = rm.role_id
+            JOIN hua_menu m ON m.id = rm.menu_id
+        WHERE
+            ur.user_id = #{userId}
+    </select>
+</mapper>

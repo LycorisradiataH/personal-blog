@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybaits.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hua.mapper.CommentMapper">
+
+    <select id="listComment" resultType="com.hua.pojo.vo.CommentVO">
+        SELECT
+        u.nickname,
+        u.avatar,
+        u.web_site,
+        c.id,
+        c.user_id,
+        c.comment_content,
+        c.gmt_create
+        FROM
+        hua_comment c
+        JOIN hua_user u ON c.user_id = u.id
+        WHERE
+        <if test="articleId != null">
+            article_id = #{articleId}
+        </if>
+        <if test="articleId == null">
+            article_id is null
+        </if>
+        AND c.is_audit = 1
+        AND parent_id IS NULL
+        ORDER BY
+        c.id DESC
+        LIMIT #{current}, #{size}
+    </select>
+
+    <select id="listReply" resultType="com.hua.pojo.vo.ReplyVO">
+        SELECT
+        *
+        FROM
+        (
+        SELECT
+        c.id,
+        c.user_id,
+        u.nickname,
+        u.avatar,
+        u.web_site,
+        c.reply_id,
+        r.nickname reply_nickname,
+        r.web_site reply_web_site,
+        c.parent_id,
+        c.comment_content,
+        c.gmt_create,
+        row_number () over ( PARTITION BY parent_id ORDER BY c.gmt_create ) row_num
+        FROM
+        hua_comment c
+        JOIN hua_user u ON c.user_id = u.id
+        JOIN hua_user r ON c.reply_id = r.id
+        WHERE
+        c.is_audit = 1
+        AND parent_id IN
+        <foreach collection="commentIdList" item="commentId" open="(" close=")" separator=",">
+            #{commentId}
+        </foreach>
+        ) t
+        WHERE
+        4 > row_num
+    </select>
+
+    <select id="listReplyCountByCommentId" resultType="com.hua.pojo.dto.ReplyCountDTO">
+        SELECT
+        parent_id comment_id,
+        count( 1 ) reply_count
+        FROM
+        hua_comment
+        WHERE
+        is_audit = 1
+        AND parent_id IN
+        <foreach collection="commentIdList" item="commentId" open="(" close=")" separator=",">
+            #{commentId}
+        </foreach>
+        GROUP BY
+        parent_id
+    </select>
+
+    <select id="listReplyByCommentId" resultType="com.hua.pojo.vo.ReplyVO">
+        SELECT
+            c.id,
+            c.user_id,
+            u.nickname,
+            u.avatar,
+            u.web_site,
+            c.reply_id,
+            r.nickname reply_nickname,
+            r.web_site reply_web_site,
+            c.parent_id,
+            c.comment_content,
+            c.gmt_create
+        FROM
+            hua_comment c
+            JOIN hua_user u ON c.user_id = u.id
+            JOIN hua_user r ON c.reply_id = r.id
+        WHERE
+            c.is_audit = 1
+          AND parent_id = #{commentId}
+        ORDER BY
+            c.id
+        LIMIT #{current}, #{size}
+    </select>
+
+    <select id="countComment" resultType="java.lang.Integer">
+        SELECT
+        count( 1 )
+        FROM
+        hua_comment c
+        LEFT JOIN hua_user u ON c.user_id = u.id
+        <where>
+            <if test="queryParam.type != null and queryParam.type == 1">
+                c.article_id IS NOT NULL
+            </if>
+            <if test="queryParam.type != null and queryParam.type == 2">
+                c.article_id IS NULL
+            </if>
+            <if test="queryParam.isAudit != null">
+                c.is_audit = #{queryParam.isAudit}
+            </if>
+            <if test="queryParam.keywords != null">
+                AND u.nickname LIKE concat('%', #{queryParam.keywords}, '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="listBackComment" resultType="com.hua.pojo.vo.CommentBackVO">
+        SELECT
+        c.id,
+        u.avatar,
+        u.nickname,
+        r.nickname reply_nickname,
+        a.article_title,
+        c.comment_content,
+        c.gmt_create,
+        c.is_audit
+        FROM
+        hua_comment c
+        LEFT JOIN hua_article a ON c.article_id = a.id
+        LEFT JOIN hua_user u ON c.user_id = u.id
+        LEFT JOIN hua_user r ON c.reply_id = r.id
+        <where>
+            <if test="queryParam.type != null and queryParam.type == 1">
+                c.article_id IS NOT NULL
+            </if>
+            <if test="queryParam.type != null and queryParam.type == 2">
+                c.article_id IS NULL
+            </if>
+            <if test="queryParam.isAudit != null">
+                and c.is_audit = #{queryParam.isAudit}
+            </if>
+            <if test="queryParam.keywords != null">
+                and u.nickname like concat('%', #{queryParam.keywords}, '%')
+            </if>
+        </where>
+        ORDER BY
+        id DESC
+        LIMIT #{current}, #{size}
+    </select>
+
+</mapper>

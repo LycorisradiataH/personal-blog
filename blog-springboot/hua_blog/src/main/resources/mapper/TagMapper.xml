@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybaits.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hua.mapper.TagMapper">
+
+    <select id="listTagNameByArticleId" resultType="java.lang.String">
+        SELECT
+            tag_name
+        FROM
+            hua_tag t
+            JOIN hua_article_tag atg ON atg.tag_id = t.id
+        WHERE
+            article_id = #{articleId}
+    </select>
+
+    <select id="listBackTag" resultType="com.hua.pojo.vo.TagBackVO">
+        SELECT
+        t.id,
+        tag_name,
+        count( atg.article_id ) article_count
+        FROM
+        hua_tag t
+        LEFT JOIN hua_article_tag atg ON t.id = atg.tag_id
+        <where>
+            <if test="queryParam.keywords != null">
+                tag_name like concat('%', #{queryParam.keywords}, '%')
+            </if>
+        </where>
+        GROUP BY
+        t.id
+        ORDER BY
+        t.id DESC
+        LIMIT #{current}, #{size}
+    </select>
+
+</mapper>
