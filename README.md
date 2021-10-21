@@ -48,7 +48,7 @@
 
 ## 技术介绍
 
-- **前端： ** Vue + vue-router + vuex + axios + vuetify + element + echarts
+- **前端：** Vue + vue-router + vuex + axios + vuetify + element + echarts
   - 前台框架：vuetify
   - 后台框架：element
 
