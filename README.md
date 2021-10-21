@@ -36,7 +36,7 @@
          <img src="https://img.shields.io/badge/Elasticsearch-7.6.2-brightgreen" alt="Elasticsearch" />
     </a>
 </div>
-<style>
+<style type="text/css">
     a {
          text-decoration: none;
     }
