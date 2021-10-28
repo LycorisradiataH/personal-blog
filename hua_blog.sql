@@ -626,7 +626,7 @@ CREATE TABLE `hua_user`  (
 -- ----------------------------
 -- Records of hua_user
 -- ----------------------------
-INSERT INTO `hua_user` VALUES (1, '819945352@qq.com', '$2a$10$dYr4xqWZK7FuCM5KbDhbp.o9LEX.9By6IkDYS4YhpG2FMtQZLm25m', 'http://r19jqirt4.hn-bkt.clouddn.com/avatar/3a2d0201-dbe0-446c-953d-8f3d6e4fecd3.jpg', 'Morri', '心态要好, 能力要强', NULL, '127.0.0.1', '', 0, '2021-10-21 17:59:55', '2021-10-11 15:01:14', '2021-10-21 17:59:55');
+INSERT INTO `hua_user` VALUES (1, 'admin@qq.com', '$2a$10$TxzLJwN4fcf0ZUO7ma5q9.GVAB.DXY62QtOqSb2efabaogwH8DZGS', 'http://r19jqirt4.hn-bkt.clouddn.com/avatar/3a2d0201-dbe0-446c-953d-8f3d6e4fecd3.jpg', '管理员', '管理员账号', NULL, '127.0.0.1', '', 0, '2021-10-21 17:59:55', '2021-10-11 15:01:14', '2021-10-21 17:59:55');
 INSERT INTO `hua_user` VALUES (2, 'test@qq.com', '$2a$10$TxzLJwN4fcf0ZUO7ma5q9.GVAB.DXY62QtOqSb2efabaogwH8DZGS', 'http://r19jqirt4.hn-bkt.clouddn.com/avatar/3a2d0201-dbe0-446c-953d-8f3d6e4fecd3.jpg', '测试账号', '仅用作测试', NULL, '127.0.0.1', '', 0, '2021-10-21 18:01:51', '2021-10-11 15:01:14', '2021-10-21 18:01:51');
 
 -- ----------------------------
