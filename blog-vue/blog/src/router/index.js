@@ -1,82 +1,66 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '@/views/home/Home'
-import Article from '@/views/article/Article'
-import Archive from '@/views/archive/Archive'
-import Category from '@/views/category/Category'
-import Tag from '@/views/tag/Tag'
-import About from '@/views/about/About'
-import Message from '@/views/message/Message'
-import ArticleList from '@/views/article/ArticleList'
-import UserInfo from '@/views/user/UserInfo'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    component: resolve => require(['../views/home/Home.vue'], resolve),
     meta: {
-      title: 'Hua的个人博客'
+      title: 'Morri的个人博客'
     }
   },
   {
     path: '/article/:articleId',
-    component: Article
+    component: resolve => require(['../views/article/Article.vue'], resolve)
   },
   {
     path: '/archive',
-    name: 'Archive',
-    component: Archive,
+    component: resolve => require(['../views/archive/Archive.vue'], resolve),
     meta: {
       title: '归档'
     }
   },
   {
     path: '/category',
-    name: 'Category',
-    component: Category,
+    component: resolve => require(['../views/category/Category.vue'], resolve),
     meta: {
       title: '分类'
     }
   },
   {
     path: '/category/:categoryId',
-    component: ArticleList
+    component: resolve => require(['../views/article/ArticleList.vue'], resolve)
   },
   {
     path: '/tag',
-    name: 'Tag',
-    component: Tag,
+    component: resolve => require(['../views/tag/Tag.vue'], resolve),
     meta: {
       title: '标签'
     }
   },
   {
     path: '/tag/:tagId',
-    component: ArticleList
+    component: resolve => require(['../views/article/ArticleList.vue'], resolve)
   },
   {
     path: '/about',
-    name: 'About',
-    component: About,
+    component: resolve => require(['../views/about/About.vue'], resolve),
     meta: {
       title: '关于我'
     }
   },
   {
     path: '/message',
-    name: 'Message',
-    component: Message,
+    component: resolve => require(['../views/message/Message.vue'], resolve),
     meta: {
       title: '留言'
     }
   },
   {
     path: '/user',
-    name: 'UserInfo',
-    component: UserInfo,
+    component: resolve => require(['../views/user/UserInfo.vue'], resolve),
     meta: {
       title: '个人中心'
     }

@@ -35,8 +35,15 @@ import LoginModel from '@/components/model/LoginModel.vue'
 import RegisterModel from '@/components/model/RegisterModel.vue'
 import ForgetModel from '@/components/model/ForgetModel.vue'
 import EmailModel from '@/components/model/EmailModel.vue'
+import { getBlogInfo } from '@/api/blog'
 
 export default {
+  created () {
+    // 上传访客信息
+    this.axios.post('/api/report')
+    // 获取博客信息
+    this.getBlogInfo()
+  },
   components: {
     Snackbar,
     TopNavBar,
@@ -48,11 +55,14 @@ export default {
     ForgetModel,
     EmailModel
   },
-  created () {
-    // 获取博客信息
-    this.getBlogInfo()
-    // 上传访客信息
-    this.axios.post('/api/report')
+  methods: {
+    getBlogInfo () {
+      getBlogInfo().then(({ data }) => {
+        if (data.status) {
+          this.$store.commit('checkBlogInfo', data.data)
+        }
+      })
+    }
   },
   computed: {
     blogInfo () {
@@ -63,13 +73,6 @@ export default {
         /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
       )
       return flag
-    }
-  },
-  methods: {
-    getBlogInfo () {
-      this.axios.get('/api/').then(({ data }) => {
-        this.$store.commit('checkBlogInfo', data.data)
-      })
     }
   }
 }

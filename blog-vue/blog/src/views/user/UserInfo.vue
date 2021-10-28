@@ -77,7 +77,8 @@ export default {
       userInfo: {
         nickname: this.$store.state.nickname,
         intro: this.$store.state.intro,
-        webSite: this.$store.state.webSite
+        webSite: this.$store.state.webSite,
+        email: this.$store.state.email
       }
     }
   },
@@ -101,7 +102,7 @@ export default {
     updateUserInfo () {
       updateUserInfo(this.userInfo).then(({ data }) => {
         if (data.status) {
-          this.$store.commit('updateUserInfo', data.data)
+          this.$store.commit('updateUserInfo', this.userInfo)
           this.$store.dispatch('snackbar/openSnackbar', {
             type: 'success',
             message: '修改信息成功'

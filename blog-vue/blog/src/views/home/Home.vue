@@ -9,8 +9,7 @@
         </h1>
         <!-- 一言 -->
         <div class="blog-intro">
-          {{ obj.output }}
-          <span class="typed-cursor">|</span>
+          {{ obj.output }} <span class="typed-cursor">|</span>
         </div>
         <!-- 联系方式 -->
         <div class="blog-contact">
@@ -271,7 +270,7 @@ export default {
   methods: {
     // 初始化
     init () {
-      document.title = this.blogInfo.websiteConfig.websiteName
+      document.title = this.blogInfo.websiteConfig.websiteName ? this.blogInfo.websiteConfig.websiteName : 'Morri的个人博客'
       // 一言Api进行打字机循环输出效果
       fetch('https://v1.hitokoto.cn')
         .then(res => {

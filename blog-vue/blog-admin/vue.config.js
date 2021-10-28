@@ -1,7 +1,16 @@
+const compressionPlugin = require("compression-webpack-plugin");
 module.exports = {
+  configureWebpack: {
+    plugins: [
+      new compressionPlugin({
+        test: /\.(js|css)(\?.*)?$/i,
+        threshold: 10240,
+        deleteOriginalAssets: false,
+      }),
+    ],
+  },
   productionSourceMap: false,
   devServer: {
-    port: 8090,
     proxy: {
       "/api": {
         target: "http://localhost:8080",

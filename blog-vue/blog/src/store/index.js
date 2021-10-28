@@ -20,7 +20,12 @@ export default new Vuex.Store({
     webSite: null,
     articleLikeSet: [],
     commentLikeSet: [],
-    blogInfo: {}
+    blogInfo: {
+      pageList: [],
+      websiteConfig: {
+        socialUrlList: []
+      }
+    }
   },
   mutations: {
     login (state, user) {
@@ -66,6 +71,10 @@ export default new Vuex.Store({
     },
     checkBlogInfo (state, blogInfo) {
       state.blogInfo = blogInfo
+      state.blogInfo.pageList = blogInfo.pageList
+      state.blogInfo.websiteConfig = blogInfo.websiteConfig
+      state.blogInfo.websiteConfig.socialUrlList =
+        blogInfo.websiteConfig.socialUrlList
     },
     articleLikeSet (state, articleId) {
       const articleLikeSet = state.articleLikeSet

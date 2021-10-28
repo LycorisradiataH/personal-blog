@@ -231,10 +231,25 @@ export default {
       this.listUsers();
     },
     changeDisable(user) {
-      this.axios.put("/api/admin/user/disable", {
-        id: user.id,
-        isDisable: user.isDisable,
-      });
+      this.axios
+        .put("/api/admin/user/disable", {
+          id: user.id,
+          isDisable: user.isDisable,
+        })
+        .then(({ data }) => {
+          if (data.status) {
+            this.$notify.success({
+              title: "成功",
+              message: data.message,
+            });
+            this.listUsers();
+          } else {
+            this.$notify.error({
+              title: "失败",
+              message: data.message,
+            });
+          }
+        });
     },
     openEditModel(user) {
       this.roleIdList = [];

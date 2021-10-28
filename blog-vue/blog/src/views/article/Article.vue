@@ -620,7 +620,7 @@ export default {
   background: #49b1f5;
   transition: all 0.5s;
 }
-.aritcle-copyright {
+.article-copyright {
   position: relative;
   margin-top: 40px;
   margin-bottom: 10px;
@@ -629,15 +629,15 @@ export default {
   padding: 0.625rem 1rem;
   border: 1px solid #eee;
 }
-.aritcle-copyright span {
+.article-copyright span {
   color: #49b1f5;
   font-weight: bold;
 }
-.aritcle-copyright a {
+.article-copyright a {
   text-decoration: underline !important;
   color: #99a9bf !important;
 }
-.aritcle-copyright:before {
+.article-copyright:before {
   position: absolute;
   top: 0.7rem;
   right: 0.7rem;
@@ -647,7 +647,7 @@ export default {
   background: #49b1f5;
   content: '';
 }
-.aritcle-copyright:after {
+.article-copyright:after {
   position: absolute;
   top: 0.95rem;
   right: 0.95rem;

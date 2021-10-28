@@ -19,6 +19,8 @@ import InfiniteLoading from 'vue-infinite-loading'
 import 'highlight.js/styles/atom-one-dark.css'
 import VueImageSwipe from 'vue-image-swipe'
 import 'vue-image-swipe/dist/vue-image-swipe.css'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 Vue.prototype.config = config
 Vue.config.productionTip = false
@@ -49,6 +51,7 @@ Vue.filter('num', function (value) {
 })
 
 router.beforeEach((to, from, next) => {
+  NProgress.start()
   if (to.meta.title) {
     document.title = to.meta.title
   }
@@ -60,6 +63,7 @@ router.afterEach(() => {
     top: 0,
     behavior: 'instant'
   })
+  NProgress.done()
 })
 
 axios.interceptors.response.use(

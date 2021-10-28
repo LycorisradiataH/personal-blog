@@ -14,7 +14,7 @@
          <img src="https://img.shields.io/badge/Mybatis--Plus-3.4.1-brightgreen" alt="Mybatis-Plus" />
          <img src="https://img.shields.io/badge/Redis-6.0.16-brightgreen" alt="Redis" />
          <img src="https://img.shields.io/badge/RabbitMQ-3.8.23-brightgreen" alt="RabbitMQ" />
-         <img src="https://img.shields.io/badge/Elasticsearch-7.6.2-brightgreen" alt="Elasticsearch" />
+         <img src="https://img.shields.io/badge/Elasticsearch-7.9.2-brightgreen" alt="Elasticsearch" />
     </a>
 </div>
 <div align="center">
@@ -29,6 +29,7 @@
     <a href="#项目总结">项目总结</a>|
     <a href="#项目截图">项目截图</a>
 </div>
+
 
 
 ## 在线地址
@@ -72,7 +73,7 @@
 | MySQL         | 8.0.26 |
 | Redis         | 6.0.16 |
 | RabbitMQ      | 3.8.23 |
-| Elasticsearch | 7.6.2  |
+| Elasticsearch | 7.9.2  |
 | Vue-cli       | 4.5.13 |
 
 ## 目录结构
