@@ -63,7 +63,7 @@ public class CommentController {
      */
     @ApiOperation(value = "添加评论")
     @PostMapping("/comment/saveComment")
-    public Result insertComment(@RequestBody CommentParam commentParam) {
+    public Result insertComment(@Valid @RequestBody CommentParam commentParam) {
         commentService.insertComment(commentParam);
         return Result.success();
     }

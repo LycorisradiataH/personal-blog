@@ -200,7 +200,7 @@ public class BlogInfoServiceImpl implements BlogInfoService {
                         .replaceAll(CITY, "");
                 redisUtils.hIncr(VISITOR_AREA, ipSource, 1);
             } else {
-                redisUtils.hIncr(VISITOR_AREA, UNKNOWN, 1L);
+                redisUtils.hIncr(VISITOR_AREA, UNKNOWN, 1);
             }
             // 访问量+1
             redisUtils.incr(BLOG_VIEW_COUNT, 1);

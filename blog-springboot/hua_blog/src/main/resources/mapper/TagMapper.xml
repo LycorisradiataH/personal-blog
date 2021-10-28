@@ -18,7 +18,8 @@
         SELECT
         t.id,
         tag_name,
-        count( atg.article_id ) article_count
+        count( atg.article_id ) article_count,
+        t.gmt_create
         FROM
         hua_tag t
         LEFT JOIN hua_article_tag atg ON t.id = atg.tag_id

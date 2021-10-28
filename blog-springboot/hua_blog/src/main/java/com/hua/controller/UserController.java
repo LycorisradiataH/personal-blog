@@ -48,7 +48,7 @@ public class UserController {
      */
     @ApiOperation(value = "用户注册")
     @PostMapping("/user/register")
-    public Result register(@RequestBody RegisterParam registerParam) {
+    public Result register(@Valid @RequestBody RegisterParam registerParam) {
         userService.register(registerParam);
         return Result.success();
     }
@@ -60,7 +60,7 @@ public class UserController {
      */
     @ApiOperation(value = "修改密码")
     @PutMapping("/user/forget")
-    public Result forgetPassword(@RequestBody RegisterParam registerParam) {
+    public Result forgetPassword(@Valid @RequestBody RegisterParam registerParam) {
         userService.forgetPassword(registerParam);
         return Result.success();
     }
@@ -72,7 +72,7 @@ public class UserController {
      */
     @ApiOperation(value = "绑定用户邮箱")
     @PutMapping("/user/updateEmail")
-    public Result updateEmail(@RequestBody RegisterParam registerParam) {
+    public Result updateEmail(@Valid @RequestBody RegisterParam registerParam) {
         userService.updateEmail(registerParam);
         return Result.success();
     }

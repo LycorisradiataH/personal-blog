@@ -64,7 +64,7 @@ public class ResourceController {
      * @return {@link Result}
      */
     @ApiOperation(value = "删除资源")
-    @DeleteMapping("/admin/resources/{id}")
+    @DeleteMapping("/admin/resource/{id}")
     public Result deleteResource(@PathVariable("id") Integer resourceId) {
         resourceService.deleteResource(resourceId);
         return Result.success();

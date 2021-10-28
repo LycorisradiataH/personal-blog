@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hua.common.exception.ServiceException;
+import com.hua.common.strategy.context.SearchStrategyContext;
 import com.hua.mapper.ArticleMapper;
 import com.hua.mapper.ArticleTagMapper;
 import com.hua.mapper.CategoryMapper;
@@ -36,7 +37,8 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-import static com.hua.common.constant.CommonConst.*;
+import static com.hua.common.constant.CommonConst.ARTICLE_SET;
+import static com.hua.common.constant.CommonConst.FALSE;
 import static com.hua.common.constant.RedisPrefixConst.*;
 import static com.hua.common.enums.ArticleStatusEnum.DRAFT;
 import static com.hua.common.enums.ArticleStatusEnum.PUBLIC;
@@ -66,6 +68,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Autowired
     private TagService tagService;
+
+    @Autowired
+    private SearchStrategyContext searchStrategyContext;
 
     @Autowired
     private HttpSession session;
@@ -199,42 +204,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         if (StringUtils.isBlank(keywords)) {
             return new ArrayList<>();
         }
-        // 搜索文章
-        List<Article> articleList = articleMapper.selectList(new LambdaQueryWrapper<Article>()
-                .eq(Article::getIsDelete, FALSE)
-                .eq(Article::getStatus, PUBLIC.getStatus())
-                .and(i -> i.like(Article::getArticleTitle, keywords)
-                        .or()
-                        .like(Article::getArticleContent, keywords)));
-        // 高亮处理
-        return articleList.stream().map(item -> {
-            // 获取关键词第一次出现的位置
-            String articleContent;
-            int index = item.getArticleContent().indexOf(keywords);
-            if (index != -1) {
-                // 获取关键词前面的文字
-                int preIndex = index > 25 ? index - 25 : 0;
-                String preText = item.getArticleContent().substring(preIndex, index);
-                // 获取关键词到后面的文字
-                int last = index + keywords.length();
-                int postLength = item.getArticleContent().length() - last;
-                int postIndex = postLength > 175 ? last + 175 : last + postLength;
-                String postText = item.getArticleContent().substring(index, postIndex);
-                // 文章内容高亮
-                articleContent = (preText + postText)
-                        .replaceAll(keywords, PRE_TAG + keywords + POST_TAG);
-            } else {
-                articleContent = item.getArticleContent();
-            }
-            // 文章标题高亮
-            String articleTitle = item.getArticleTitle()
-                    .replaceAll(keywords, PRE_TAG + keywords + POST_TAG);
-            return ArticleSearchVO.builder()
-                    .id(item.getId())
-                    .articleTitle(articleTitle)
-                    .articleContent(articleContent)
-                    .build();
-        }).collect(Collectors.toList());
+        return searchStrategyContext.executeSearchStrategy(keywords);
     }
 
     @Override

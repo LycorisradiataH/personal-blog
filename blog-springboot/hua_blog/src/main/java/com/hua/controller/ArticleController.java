@@ -170,7 +170,7 @@ public class ArticleController {
     @OptLog(optType = UPDATE)
     @ApiOperation(value = "恢复或删除文章")
     @PutMapping("/admin/article")
-    public Result updateArticleDelete(DeleteParam deleteParam) {
+    public Result updateArticleDelete(@Valid @RequestBody DeleteParam deleteParam) {
         articleService.updateArticleDelete(deleteParam);
         return Result.success();
     }

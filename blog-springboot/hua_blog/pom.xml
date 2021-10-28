@@ -21,6 +21,7 @@
         <mybatis-plus.version>3.4.1</mybatis-plus.version>
         <hutool.version>5.7.5</hutool.version>
         <swagger.version>2.9.2</swagger.version>
+        <elasticsearch.version>7.9.2</elasticsearch.version>
     </properties>
     <dependencies>
         <!-- 七牛云oos对象存储 -->
@@ -87,6 +88,11 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
@@ -149,14 +155,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
             </plugin>
         </plugins>
     </build>

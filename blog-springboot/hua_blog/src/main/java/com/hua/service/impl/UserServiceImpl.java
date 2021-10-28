@@ -25,6 +25,7 @@ import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.session.SessionInformation;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -35,6 +36,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.hua.common.constant.CommonConst.*;
 import static com.hua.common.constant.MqPrefixConst.EMAIL_EXCHANGE;
 import static com.hua.common.constant.RedisPrefixConst.*;
 import static com.hua.common.enums.UserAreaTypeEnum.getUserAreaType;
@@ -295,6 +297,34 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         } else {
             throw new ServiceException("旧密码不正确");
         }
+    }
+
+    /**
+     * 统计用户地区
+     */
+    @Scheduled(cron = "0 0 * * * ?")
+    public void statisticalUserArea() {
+        // 统计用户地域分布
+        Map<String, Long> userAreaMap = userMapper.selectList(new LambdaQueryWrapper<User>()
+                    .select(User::getIpSource))
+                .stream()
+                .map(item -> {
+                    if (StringUtils.isNotBlank(item.getIpSource())) {
+                        return item.getIpSource().substring(0, 2)
+                                .replaceAll(PROVINCE, "")
+                                .replaceAll(CITY, "");
+                    }
+                    return UNKNOWN;
+                })
+                .collect(Collectors.groupingBy(item -> item, Collectors.counting()));
+        // 转换格式
+        List<UserAreaVO> userAreaList = userAreaMap.entrySet().stream()
+                .map(item -> UserAreaVO.builder()
+                    .name(item.getKey())
+                    .value(item.getValue())
+                    .build())
+                .collect(Collectors.toList());
+        redisUtils.set(USER_AREA, JSON.toJSONString(userAreaList));
     }
 
     /**

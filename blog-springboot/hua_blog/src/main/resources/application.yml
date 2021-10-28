@@ -3,9 +3,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/hua_blog?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&allowMultiQueries=true
+    url: jdbc:mysql://localhost:3306/博客名?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&allowMultiQueries=true
     username: root
-    password: 123456
+    password: root
     initialSize: 5
     minIdle: 5
     maxActive: 20
@@ -19,8 +19,8 @@ spring:
   # 配置email
   mail:
     host: smtp.qq.com
-    username: 819945352@qq.com
-    password: tupmlggzdfpvbdhb
+    username: test@qq.com
+    password: root
     port: 587
     default-encoding: UTF-8
     properties:
@@ -33,13 +33,17 @@ spring:
   redis:
     host: localhost
     port: 6379
-    password:
+    password: root
   # 配置 rabbitmq
   rabbitmq:
     host: localhost
     port: 5672
     username: guest
     password: guest
+  # 配置 elasticsearch
+  elasticsearch:
+    rest:
+      uris: http://localhost:9200
   servlet:
     multipart:
       # 单个文件大小
@@ -53,17 +57,18 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:mapper/*.xml
-  global-config:
-    db-config:
-      table-prefix: hua_
-
-# 网站前台域名（邮件通知用）
-website:
-  url: http://localhost:8090
 
 # 配置七牛密钥
 qiniu:
-  url: http://r19jqirt4.hn-bkt.clouddn.com/
-  bucketName: hua-blog
-  accessKey: 8g4kimtmdvAkqSiiVgLLUiZPJS1SJdnU5oJM9WKH
-  accessSecretKey: fc0D37xTGdUhw6nVhG9lyMhUgVija9zHfxgqmh3N
+  url: 
+  bucketName: 
+  accessKey: 
+  accessSecretKey: 
+
+# 网站前台域名（邮件通知用）
+website:
+  url: http://localhost
+
+# 搜索模式( mysql 或 elasticsearch )
+search:
+  mode: mysql
