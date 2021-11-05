@@ -102,7 +102,7 @@ export default {
   bottom: 0;
   right: 0;
   left: 0;
-  background: url(http://r19jqirt4.hn-bkt.clouddn.com/admin-login.jpg) center
+  background: url(http://www.static.hdiata.com/admin-login.jpg) center
     center / cover no-repeat;
 }
 .login-card {

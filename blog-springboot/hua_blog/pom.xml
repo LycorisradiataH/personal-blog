@@ -14,6 +14,9 @@
     <name>hua_blog</name>
     <description>Personal Blog For Hua</description>
     <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <java.version>1.8</java.version>
         <druid.version>1.2.5</druid.version>
         <userAgentUtils.version>1.20</userAgentUtils.version>
