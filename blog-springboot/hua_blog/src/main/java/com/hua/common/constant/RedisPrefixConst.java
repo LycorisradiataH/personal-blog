@@ -16,7 +16,7 @@ public class RedisPrefixConst {
     /**
      * 验证码
      */
-    public static final String CODE_KEY = "code_";
+    public static final String CODE_KEY = "code:";
 
     /**
      * 博客浏览量
@@ -36,7 +36,7 @@ public class RedisPrefixConst {
     /**
      * 用户点赞文章
      */
-    public static final String ARTICLE_USER_LIKE = "article_user_like";
+    public static final String ARTICLE_USER_LIKE = "article_user_like:";
 
     /**
      * 评论点赞量
@@ -46,7 +46,7 @@ public class RedisPrefixConst {
     /**
      * 用户点赞评论
      */
-    public static final String COMMENT_USER_LIKE = "comment_user_like";
+    public static final String COMMENT_USER_LIKE = "comment_user_like:";
 
     /**
      * 网站配置

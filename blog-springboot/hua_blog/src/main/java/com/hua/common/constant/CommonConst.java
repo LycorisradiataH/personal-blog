@@ -53,7 +53,7 @@ public class CommonConst {
     /**
      * 默认用户头像
      */
-    public static final String DEFAULT_AVATAR = "http://www.static.hdiata.com/config/tourist.png";
+    public static final String DEFAULT_AVATAR = "http://OSS地址/config/tourist.png";
 
     /**
      * 浏览文章集合

@@ -188,12 +188,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             // 点过赞则删除文章id
             redisUtils.sRem(articleLikeKey, articleId);
             // 文章点赞量 - 1
-            redisUtils.hDecr(ARTICLE_LIKE_COUNT, String.valueOf(articleId), 1);
+            redisUtils.hDecr(ARTICLE_LIKE_COUNT, String.valueOf(articleId), 1L);
         } else {
             // 未点赞则增加文章id
-            redisUtils.sSet(articleLikeKey, String.valueOf(articleId));
+            redisUtils.sSet(articleLikeKey, articleId);
             // 文章点赞量 + 1
-            redisUtils.hIncr(ARTICLE_LIKE_COUNT, String.valueOf(articleId), 1);
+            redisUtils.hIncr(ARTICLE_LIKE_COUNT, String.valueOf(articleId), 1L);
         }
     }
 

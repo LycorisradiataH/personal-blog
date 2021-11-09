@@ -287,7 +287,7 @@ public class RedisUtils {
      * @param by 要增加几(大于0)
      * @return
      */
-    public Double hIncr(String key, String item, double by) {
+    public Long hIncr(String key, String item, Long by) {
         return redisTemplate.opsForHash().increment(key, item, by);
     }
 
@@ -298,7 +298,7 @@ public class RedisUtils {
      * @param by 要减少几(小于0)
      * @return
      */
-    public Double hDecr(String key, String item, double by) {
+    public Long hDecr(String key, String item, Long by) {
         return redisTemplate.opsForHash().increment(key, item, -by);
     }
 
@@ -353,12 +353,7 @@ public class RedisUtils {
      * @return true存在   false不存在
      */
     public boolean sHasKey(String key, Object value) {
-        try {
-            return redisTemplate.opsForSet().isMember(key, value);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        return redisTemplate.opsForSet().isMember(key, value);
     }
 
     /**

@@ -160,12 +160,12 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
             // 点过赞则删除评论id
             redisUtils.sRem(commentLikeKey, commentId);
             // 评论点赞量 - 1
-            redisUtils.hDecr(COMMENT_LIKE_COUNT, String.valueOf(commentId), 1);
+            redisUtils.hDecr(COMMENT_LIKE_COUNT, String.valueOf(commentId), 1L);
         } else {
             // 未点赞则增加评论id
             redisUtils.sSet(commentLikeKey, commentId);
             // 评论点赞量 + 1
-            redisUtils.hIncr(COMMENT_LIKE_COUNT, String.valueOf(commentId), 1);
+            redisUtils.hIncr(COMMENT_LIKE_COUNT, String.valueOf(commentId), 1L);
         }
     }
 

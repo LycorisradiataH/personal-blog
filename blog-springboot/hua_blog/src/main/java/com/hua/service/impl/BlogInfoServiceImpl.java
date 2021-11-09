@@ -198,9 +198,9 @@ public class BlogInfoServiceImpl implements BlogInfoService {
                 ipSource = ipSource.substring(0, 2)
                         .replaceAll(PROVINCE, "")
                         .replaceAll(CITY, "");
-                redisUtils.hIncr(VISITOR_AREA, ipSource, 1);
+                redisUtils.hIncr(VISITOR_AREA, ipSource, 1L);
             } else {
-                redisUtils.hIncr(VISITOR_AREA, UNKNOWN, 1);
+                redisUtils.hIncr(VISITOR_AREA, UNKNOWN, 1L);
             }
             // 访问量+1
             redisUtils.incr(BLOG_VIEW_COUNT, 1);
