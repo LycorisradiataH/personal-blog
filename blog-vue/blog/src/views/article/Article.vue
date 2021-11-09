@@ -82,7 +82,7 @@
           <div class="article-copyright">
             <div>
               <span>文章作者: </span>
-              <a href="#" target="_blank">Hua</a>
+              <a href="#" target="_blank">Morri</a>
             </div>
             <div>
               <span>文章链接: </span>
@@ -121,7 +121,7 @@
                 {{ article.likeCount }}
               </span>
             </a>
-            <a class="reward-btn">
+            <a class="reward-btn" v-if="blogInfo.websiteConfig.isReward == 1">
               <!-- 打赏按钮 -->
               <i class="iconfont icon-qr-code"></i> 打赏
               <!-- 二维码 -->
@@ -383,7 +383,7 @@ export default {
           })
           // 添加图片预览功能
           const imgList = this.$refs.article.getElementsByTagName('img')
-          for (let i = 0; i < imgList.length; i++) {
+          for (var i = 0; i < imgList.length; i++) {
             this.imgList.push(imgList[i].src)
             imgList[i].addEventListener('click', function (e) {
               that.previewImg(e.target.currentSrc)

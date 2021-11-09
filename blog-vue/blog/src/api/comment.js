@@ -2,7 +2,7 @@ import request from '@/request'
 
 export function addComment (comment) {
   return request({
-    url: '/api/comment/insertComment',
+    url: '/api/comment/saveComment',
     method: 'post',
     data: comment
   })
