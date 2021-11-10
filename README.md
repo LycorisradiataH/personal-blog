@@ -175,6 +175,8 @@ blog
 
 ### 项目环境
 
+详情请查看文章👉 [博客项目环境安装](https://hdiata.com/article/3)
+
 ### 项目配置
 
 详情请查看文章👉 [博客项目配置](https://www.hdiata.com/article/2)
