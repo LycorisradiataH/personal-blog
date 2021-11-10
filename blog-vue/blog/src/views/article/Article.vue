@@ -450,23 +450,22 @@ export default {
           // 复制功能主要使用的是clipboard.js
           let html = `<button class="copy-btn iconfont icon-copy" type="button"
            data-clipboard-action="copy" data-clipboard-target="#copy${codeIndex}"></button>`
-          const linesLength = str.split('/\n/').length - 1
+          const linesLength = str.split(/\n/).length - 1
           // 生成行号
           let linesNum = '<span aria-hidden="true" class="line-numbers-rows">'
           for (let index = 0; index < linesLength; index++) {
-            linesNum += '<span></span>'
+            linesNum = linesNum + '<span></span>'
           }
           linesNum += '</span>'
           if (lang && hljs.getLanguage(lang)) {
             // highlight.js 高亮代码
             const preCode = hljs.highlight(lang, str, true).value
-            html += preCode
+            html = html + preCode
             if (linesLength) {
               html += '<b class="name">' + lang + '</b>'
             }
             // 将代码包裹在 textarea 中，由于防止textarea渲染出现问题，这里将 '<' 用 '<' 代替，不影响复制功能
-            return `<pre class="hljs"><code>${html}</code>${linesNum}</pre><textarea
-             style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy${codeIndex}">
+            return `<pre class="hljs"><code>${html}</code>${linesNum}</pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy${codeIndex}">
              ${str.replace(/<\/textarea>/g, '</textarea>')}</textarea>`
           }
         }
