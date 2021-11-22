@@ -24,6 +24,8 @@ import java.util.UUID;
 public class QiniuUtils {
 
     private static String url;
+	
+	private static String bucket;
 
     private static String accessKey;
 
@@ -33,6 +35,11 @@ public class QiniuUtils {
     public void setUrl(String url) {
         QiniuUtils.url = url;
     }
+	
+	@Value("${qiniu.bucketName}")
+	public void setBucket(String bucket) {
+		QiniuUtils.bucket = bucket;
+	}
 
     @Value("${qiniu.accessKey}")
     public void setAccessKey(String accessKey) {
@@ -63,7 +70,6 @@ public class QiniuUtils {
         // 其他参数参考类注释
         UploadManager uploadManager = new UploadManager(cfg);
         // 生成上传凭证，然后准备上传
-        String bucket = "hua-blog";
         // 默认不指定key的情况下，以文件内容的hash值作为文件名
         try {
             byte[] uploadBytes = file.getBytes();
