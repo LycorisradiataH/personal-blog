@@ -4,6 +4,8 @@
     <snackbar></snackbar>
     <!-- 导航栏 -->
     <top-nav-bar></top-nav-bar>
+    <!-- 侧边栏 -->
+    <side-nav-bar></side-nav-bar>
     <!-- 内容 -->
     <v-main>
       <router-view :key="$route.fullPath"></router-view>
@@ -28,6 +30,7 @@
 <script>
 import Snackbar from '@/components/snackbar/Snackbar.vue'
 import TopNavBar from '@/components/layout/TopNavBar'
+import SideNavBar from '@/components/layout/SideNavBar'
 import MyFooter from '@/components/layout/Footer'
 import BackTop from '@/components/backtop/BackTop.vue'
 import SearchModel from '@/components/model/SearchModel.vue'
@@ -47,6 +50,7 @@ export default {
   components: {
     Snackbar,
     TopNavBar,
+    SideNavBar,
     MyFooter,
     BackTop,
     SearchModel,

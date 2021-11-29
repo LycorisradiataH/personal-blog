@@ -12,6 +12,7 @@ export default new Vuex.Store({
     registerDialog: false,
     forgetDialog: false,
     emailDialog: false,
+    drawer: false,
     userId: null,
     avatar: null,
     email: null,

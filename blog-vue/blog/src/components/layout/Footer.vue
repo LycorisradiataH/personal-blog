@@ -6,9 +6,19 @@
         {{ new Date().getFullYear() }} By
         {{ blogInfo.websiteConfig.websiteAuthor }}
       </div>
-      <a href="https://beian.miit.gov.cn/" target="_blank">
-        {{ blogInfo.websiteConfig.websiteRecordNo }}
-      </a>
+      <div>
+        <a href="https://beian.miit.gov.cn/" target="_blank">
+          {{ blogInfo.websiteConfig.websiteRecordNo }}
+        </a>
+        |
+        <a
+          target="_blank"
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44020402000283"
+        >
+          <img src="https://www.static.hdiata.com/config/beian.png" />
+          {{ blogInfo.websiteConfig.websiteBeianNo }}
+        </a>
+      </div>
     </div>
   </v-footer>
 </template>

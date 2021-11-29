@@ -116,8 +116,8 @@ export default {
       })
     },
     uploadAvatar (res) {
-      if (res.data.status) {
-        this.$store.commit('updateAvatar', res.data.data)
+      if (res.status) {
+        this.$store.commit('updateAvatar', res.data)
         this.$store.dispatch('snackbar/openSnackbar', {
           type: 'success',
           message: '修改头像成功'
@@ -125,7 +125,7 @@ export default {
       } else {
         this.$store.dispatch('snackbar/openSnackbar', {
           type: 'error',
-          message: res.data.message
+          message: res.message
         })
       }
     },
